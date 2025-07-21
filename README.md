@@ -24,3 +24,31 @@ QR/
 ├── index_old_design.html  
 ├── reset.css             
 ```
+## 🎯 Key Features Implemented
+✅ Homepage with responsive layout and inline CSS & JS
+
+✅ Background video with play/pause functionality
+
+✅ 4 slider dots as per Figma, using 2 available images (images are repeated to fill all slides)
+
+✅ All images and video assets stored inside Home_Images/ and Home_Video/
+
+✅ No external CSS or JS files – everything is embedded in index.html for portability
+
+## 📥 How to Use
+### Clone or download the repository.
+Move the folder into C:\xampp\htdocs\ (or your server directory).
+
+### Open your browser and go to:
+http://localhost/QRAlliymi_website-main/QR/index.html
+
+### Make sure to also download all contents inside:
+Home_Images/
+Home_Video/
+
+## 📝 Additional Notes
+The design followed is based on the provided Figma file.
+
+All media content is placeholder (reused from previous tasks).
+
+Project structure is kept simple for quick review and integration.
