@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanwha:wght@400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=NanumSquare:wght@300;400;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum Gothic:wght@700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PyeongChang Peace:wght@700&display=swap" />
+    
+    <style>
+      /* --- CLEANED AND EMBEDDED CSS --- */
+
+      /* General Body Styles */
+      body {
+        margin: 0;
+        line-height: normal;
+        background-color: #f5f5f5;
+        font-family: NanumSquare, sans-serif;
+      }
+
+      /* Main Container */
+      .qr-page-container {
+        width: 100%;
+        position: relative;
+        background-color: #fff;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+        font-size: 46.8px;
+        color: #fff;
+      }
+
+      /* --- HEADER --- */
+      .header {
+        width: 100%;
+        position: fixed; 
+        top: 0;
+        background-color: transparent; 
+        color: white; 
+        box-sizing: border-box;
+        height: 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000; 
+        font-size: 16px;
+        transition: background-color 0.3s ease, color 0.3s ease; 
+      }
+      
+      .header.scrolled {
+        background-color: white !important;
+        color: black !important;
+        border-bottom: 1px solid #dcdcdc; 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
+      }
+      
+      .header.scrolled .caption1-nanumsquare1,
+      .header.scrolled .div8,
+      .header.scrolled .headermenu {
+        color: black !important;
+      }
+      
+      .header *,
+      .header.scrolled * {
+        transition: color 0.3s ease;
+      }
+
+      .header-inner {
+        width: 100%;
+        max-width: 1240px;
+        padding: 0 20px;
+        box-sizing: border-box;
+        height: 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .group {
+        width: 100%;
+        height: 64px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .symbol-parent {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+      }
+      .symbol-icon1 {
+        width: 26.2px;
+        height: 26.2px;
+      }
+      .logo-bold {
+        width: 65.5px;
+        height: 22.3px;
+      }
+      .headermenu-parent {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .headermenu,
+      .caption1-nanumsquare1,
+      .div8 {
+        color: white;
+      }
+      
+      .caption1-nanumsquare1 {
+        position: relative;
+        line-height: 20px;
+      }
+      .div8 {
+        position: relative;
+        line-height: 20px;
+        font-weight: 300;
+      }
+
+      /* --- HERO SECTION --- */
+      .hero-section {
+        position: relative; 
+        z-index: 1; 
+        width: 100%; 
+        max-width: 1920px;
+        height: 1080px;
+        font-family: Hanwha, sans-serif;
+      }
+      .image-1852-icon {
+        z-index: 0; 
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .text1 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+      .div1 {
+        position: absolute;
+        top: 50%;
+        left: 55%;
+        transform: translateY(-50%);
+        width: 969.2px;
+        max-width: 45%;
+        height: auto;
+      }
+      .carousel {
+        position: absolute;
+        bottom: 22.5%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 4px 8px;
+        gap: 8px;
+      }
+      .carousel-dot {
+        border-radius: 1000px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 4px;
+      }
+      .active, .inactive {
+        border-radius: 1000px;
+        display: flex;
+      }
+      .item {
+        width: 8px;
+        position: relative;
+        height: 8px;
+      }
+      
+      .item-child {
+        border-radius: 8px;
+        width: 8px;
+        height: 8px;
+        transition: background-color 0.3s ease; 
+      }
+      .active .item-child {
+        background-color: #ff6600; 
+      }
+      .inactive .item-child {
+        background-color: #fff; 
+      }
+      
+      /* --- CAROUSEL CONTROLS --- */
+      .carousel-controls {
+        display: flex;
+        align-items: center;
+      }
+      .carousel-control-btn {
+        width: 12px;
+        height: 12px;
+        cursor: pointer;
+        padding: 4px;
+        box-sizing: content-box;
+      }
+
+      /* Menu link styles */
+      .menu-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        height: 100%;
+        padding: 0 8px;
+        display: flex;
+        align-items: center;
+        transition: background-color 0.2s;
+      }
+      
+      .menu-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      .header.scrolled .menu-link:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+
+      /* --- MAIN CONTENT AREA --- */
+      .frame-parent {
+        position: relative;
+        width: 1920px;
+        max-width: 100%;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 9px;
+        color: #000;
+        box-shadow: 0px -4px 30px rgba(0, 0, 0, 0.25);
+        border-radius: 100px 100px 0 0;
+        margin-top: -215px;
+        padding-top: 0px;
+        box-sizing: border-box; 
+        z-index: 2;
+      }
+
+      /* DOWNLOAD SECTION */
+      .download-qr-googleplay-parent {
+        width: 100%;
+        max-width: 1240px;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 50px 20px;
+        box-sizing: border-box;
+        margin: 0 auto;
+      }
+
+      .combined-download-image {
+          width: 124px;
+          height: auto;
+          display: block;
+      }
+      
+      .symbol-icon {
+        width: 7.4px;
+        position: relative;
+        height: 7.3px;
+      }
+      .logo-38px-bold {
+        width: 17.7px;
+        position: relative;
+        height: 6px;
+      }
+      .logo {
+        position: absolute;
+        top: 113.42px;
+        left: 24.05px;
+        background-color: #fff;
+        width: 61.3px;
+        height: 11.6px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 2.3px;
+      }
+      .kakaotalk-photo-2025-06-18-16-icon {
+        position: absolute;
+        top: 47px;
+        left: -220px;
+        width: 177px;
+        height: 177px;
+        object-fit: cover;
+      }
+      .logo-parent {
+        width: 177px;
+        position: absolute;
+        margin: 0 !important;
+        top: 0px;
+        right: 0;
+        height: 177px;
+        z-index: 3;
+      }
+
+      /* Video section */
+      .image-1850-parent {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 100px 20px;
+        box-sizing: border-box;
+      }
+      .image-1850-icon {
+        width: 100%;
+        max-width: 1240px;
+        height: auto;
+        object-fit: cover;
+      }
+      .video {
+        width: 90%;
+        max-width: 720px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 15px;
+        aspect-ratio: 16 / 9;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* --- SNS ICONS --- */
+      .sns-icon {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.3s ease;
+      }
+      .sns-icon:hover {
+        transform: scale(1.05);
+      }
+      .sns-icon img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: opacity 0.3s ease;
+        object-fit: cover;
+      }
+      .sns-icon .normal {
+        opacity: 1;
+      }
+      .sns-icon .hover {
+        opacity: 0;
+      }
+      .sns-icon:hover .normal {
+        opacity: 0;
+      }
+      .sns-icon:hover .hover {
+        opacity: 1;
+      }
+
+      /* SNS Section */
+      .image-1853-icon {
+        width: 1920px;
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+      .frame-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 30px;
+        color: #000;
+      }
+      .title-parent {
+        width: 100%;
+        max-width: 1024px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 100px 20px;
+        box-sizing: border-box;
+        gap: 50px;
+      }
+      .title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+      }
+      .icon-computer {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+      }
+      .title-nanumsquare {
+        position: relative;
+        font-weight: 800;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+      .video1 {
+        width: 100%;
+        max-width: 720px;
+        aspect-ratio: 16 / 9;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .frame-wrapper {
+        width: 100%;
+        background-color: #f9f9f9;
+        display: flex;
+        justify-content: center;
+        padding: 64px 20px;
+        box-sizing: border-box;
+      }
+      .sns-blog-parent {
+        width: 100%;
+        max-width: 720px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        gap: 20px;
+      }
+
+      /* --- FOOTER --- */
+      .footer {
+        position: relative;
+        width: 100%;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.85);
+      }
+      .footer-inner {
+        width: 100%;
+        border-top: 1px solid #dcdcdc;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .frame-div {
+        width: 100%;
+        max-width: 1240px;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 50px 20px;
+        box-sizing: border-box;
+        gap: 30px;
+      }
+      .frame-parent1 {
+        flex: 2 1 500px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .frame-parent2 {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .frame-parent3 {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 0 16px;
+      }
+      .wrapper { border-right: 1px solid #b9b9b9; padding-right: 16px; }
+      .container { border-right: 1px solid #b9b9b9; padding: 0 16px; }
+      .frame { padding-left: 16px; }
+      .e-jejecommsgmailcom {
+        position: relative;
+        line-height: 1.5;
+      }
+      .t-070-4252-5571-parent {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 8px 24px;
+      }
+      .parent {
+        flex: 1 1 200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 24px;
+        font-size: 15px;
+        color: #222;
+        text-align: right;
+      }
+      
+      /* --- IMPROVED VIDEO PLAYER STYLES --- */
+      .video-player-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+        overflow: hidden;
+        background: #000;
+      }
+      
+      .video-thumbnail {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        transition: opacity 0.3s;
+      }
+      
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.3s;
+      }
+      
+      .video-play-btn {
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
+        z-index: 3;
+        transition: transform 0.2s, opacity 0.3s;
+      }
+      
+      .video-play-btn:hover {
+        transform: scale(1.1);
+      }
+      
+      .video-player-container.playing .video-thumbnail,
+      .video-player-container.playing .video-overlay {
+        opacity: 0;
+        pointer-events: none;
+      }
+      
+      .video-player-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+      
+      .video-controls {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0,0,0,0.7);
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 4;
+        opacity: 0;
+        transition: opacity 0.3s;
+        transform: translateY(100%);
+      }
+      
+      .video-player-container:hover .video-controls {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      .control-btn {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 5px;
+      }
+      
+      .progress-container {
+        flex-grow: 1;
+        height: 4px;
+        background: rgba(255,255,255,0.3);
+        margin: 0 15px;
+        border-radius: 2px;
+        position: relative;
+        cursor: pointer;
+      }
+      
+      .progress-bar {
+        height: 100%;
+        background: #ff6600;
+        border-radius: 2px;
+        width: 0%;
+      }
+      
+      .time-display {
+        color: white;
+        font-size: 12px;
+        font-family: NanumSquare, sans-serif;
+        min-width: 80px;
+        text-align: center;
+      }
+      
+      .volume-container {
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+      }
+      
+      .volume-slider {
+        width: 80px;
+        margin: 0 10px;
+      }
+      
+      .fullscreen-btn {
+        margin-left: 10px;
+      }
+      
+      .video-title {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        z-index: 2;
+        background: rgba(0,0,0,0.5);
+        padding: 5px 10px;
+        border-radius: 5px;
+        max-width: 90%;
+      }
+      
+      .video-player-container.playing .video-title {
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      
+      .video-player-container.playing:hover .video-title {
+        opacity: 1;
+      }
+
+      /* Media query for smaller screens */
+      @media (max-width: 1200px) {
+        .div1 { display: none; }
+        .logo-parent { display: none; }
+      }
+      @media (max-width: 768px) {
+        .frame-div { flex-direction: column; }
+        .parent { justify-content: flex-start; text-align: left; }
+        .headermenu-parent { display: none; }
+        .download-qr-googleplay-parent {
+          flex-direction: column;
+        }
+        .logo-parent {
+          position: relative;
+          top: auto;
+          left: auto;
+          right: auto;
+          margin-top: 20px !important;
+        }
+        .video-play-btn {
+          width: 60px;
+          height: 60px;
+        }
+        .video-controls {
+          flex-wrap: wrap;
+          padding: 5px;
+        }
+        .progress-container {
+          order: 3;
+          width: 100%;
+          margin: 5px 0;
+        }
+        .volume-container {
+          display: none;
+        }
+      }
+    </style>
+</head>
+<body>
+    <div class="qr-page-container">
+        <div class="header">
+            <div class="header-inner">
+                <div class="group">
+                    <div class="text1">
+                        <div class="symbol-parent">
+                            <img class="symbol-icon1" alt="" src="./Home_Images/symbol_top.svg">
+                            <img class="logo-bold" alt="" src="./Home_Images/qr_alliym_name_top.svg">
+                        </div>
+                    </div>
+                    <div class="headermenu-parent">
+                        <a href="test2.html" class="menu-link">
+                            <div class="headermenu">
+                                <div class="text1">
+                                    <b class="caption1-nanumsquare1">QR알리미란?</b>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="div8">|</div>
+                        <a href="./QRUserGuide/index.html" class="menu-link">
+                            <div class="frame-parent3">
+                                <div class="text1">
+                                    <b class="caption1-nanumsquare1">QR알리미 사용하기</b>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="div8">|</div>
+                        <a href="community.html" class="menu-link">
+                            <div class="frame-parent3">
+                                <div class="text1">
+                                    <b class="caption1-nanumsquare1">커뮤니티</b>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="div8">|</div>
+                        <a href="b2b.html" class="menu-link">
+                            <div class="frame-parent3">
+                                <div class="text1">
+                                    <b class="caption1-nanumsquare1">B2B</b>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-section">
+            <img class="image-1852-icon" alt="Background image of a road" src="./Home_Images/Hero_1.png">
+            <div class="div1">
+            </div>
+            <div class="carousel">
+                <div class="carousel-dot">
+                    <div class="active"><div class="item"><div class="item-child"></div></div></div>
+                    <div class="inactive"><div class="item"><div class="item-child"></div></div></div>
+                    <div class="inactive"><div class="item"><div class="item-child"></div></div></div>
+                    <div class="inactive"><div class="item"><div class="item-child"></div></div></div>
+                </div>
+                <div class="carousel-controls">
+                    <img id="playPauseBtn" class="carousel-control-btn" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='white'%3E%3Cpath d='M2 1H4V11H2V1Z'/%3E%3Cpath d='M8 1H10V11H8V1Z'/%3E%3C/svg%3E" alt="Pause">
+                </div>
+            </div>
+        </div>
+
+        <div class="frame-parent">
+            <div class="download-qr-googleplay-parent">
+                <a href="https://play.google.com/store/apps" target="_blank" rel="noopener noreferrer">
+                    <img class="combined-download-image" src="./Home_Images/appstore_QR.png" alt="Download on Google Play">
+                </a>
+                <a href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer">
+                    <img class="combined-download-image" src="./Home_Images/google_QR.png" alt="Download on the App Store">
+                </a>
+                <a href="introduction.pdf" download="QR_Allimi_Introduction.pdf">
+                     <img class="combined-download-image" src="./Home_Images/QR_introduction.png" alt="Download Introduction PDF">
+                </a>
+                <div class="logo-parent">
+                    <div class="logo">
+                        <img class="symbol-icon" alt="" src="symbol.svg">
+                        <img class="logo-38px-bold" alt="" src="logo (엘리스 디지털배움체 / 38px / bold).svg">
+                    </div>
+                    <img class="kakaotalk-photo-2025-06-18-16-icon" alt="" src="./Home_Images/KakaoTalk_Photo_1.png">
+                </div>
+            </div>
+
+            <div class="image-1850-parent">
+                <img class="image-1850-icon" alt="Decorative background" src="./Home_Images/background_image.png">
+                <div class="video">
+                    <div class="video-player-container" id="videoContainer1">
+                        <div class="video-overlay">
+                            <img src="./Home_Images/Video.svg" alt="Play" class="video-play-btn" id="playVideo1">
+                        </div>
+                        <video id="videoPlayer1">
+                            <source src="./Home_Video/news_video1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-controls">
+                            <button class="control-btn play-pause-btn">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
+                                    <path d="M3 2L13 8L3 14V2Z" id="playIcon"/>
+                                    <path d="M4 2H6V14H4V2Z M10 2H12V14H10V2Z" id="pauseIcon" style="display:none"/>
+                                </svg>
+                            </button>
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <div class="time-display">00:00 / 00:00</div>
+                            <div class="volume-container">
+                                <button class="control-btn volume-btn">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
+                                        <path d="M11 4L7 8L11 12V4Z"/>
+                                        <path d="M2 6H5L8 3V13L5 10H2V6Z"/>
+                                    </svg>
+                                </button>
+                                <input type="range" min="0" max="1" step="0.01" value="1" class="volume-slider">
+                            </div>
+                            <button class="control-btn fullscreen-btn">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
+                                    <path d="M2 2V6H0V0H6V2H2ZM10 0H16V6H14V2H10V0ZM2 10V14H6V16H0V10H2ZM14 10V14H10V16H16V10H14Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <img class="image-1853-icon" alt="Decorative transition image" src="./Home_Images/section3.png">
+            
+            <div class="frame-container">
+                <div class="title-parent">
+                    <div class="title">
+                        <img class="icon-computer" alt="SNS icon" src="./Home_Images/icon_computer.png">
+                        <div class="text1">
+                            <div class="title-nanumsquare">QR알리미 SNS</div>
+                        </div>
+                    </div>
+                    <div class="video1">
+                        <div class="video-player-container" id="videoContainer2">
+                            <div class="video-overlay">
+                                <img src="./Home_Images/Video.svg" alt="Play" class="video-play-btn" id="playVideo2">
+                            </div>
+                            <video id="videoPlayer2">
+                                <source src="./Home_Video/news_video2.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-controls">
+                                <button class="control-btn play-pause-btn">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
+                                        <path d="M3 2L13 8L3 14V2Z" id="playIcon"/>
+                                        <path d="M4 2H6V14H4V2Z M10 2H12V14H10V2Z" id="pauseIcon" style="display:none"/>
+                                    </svg>
+                                </button>
+                                <div class="progress-container">
+                                    <div class="progress-bar"></div>
+                                </div>
+                                <div class="time-display">00:00 / 00:00</div>
+                                <div class="volume-container">
+                                    <button class="control-btn volume-btn">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
+                                            <path d="M11 4L7 8L11 12V4Z"/>
+                                            <path d="M2 6H5L8 3V13L5 10H2V6Z"/>
+                                        </svg>
+                                    </button>
+                                    <input type="range" min="0" max="1" step="0.01" value="1" class="volume-slider">
+                                </div>
+                                <button class="control-btn fullscreen-btn">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
+                                        <path d="M2 2V6H0V0H6V2H2ZM10 0H16V6H14V2H10V0ZM2 10V14H6V16H0V10H2ZM14 10V14H10V16H16V10H14Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="frame-wrapper">
+                    <div class="sns-blog-parent">
+                        <a href="#" class="sns-icon">
+                            <img class="normal" alt="Blog" src="./Home_Images/sns_blog.svg">
+                            <img class="hover" alt="Blog hover" src="./Home_Images/sns_blog_on.svg">
+                        </a>
+                        <a href="#" class="sns-icon">
+                            <img class="normal" alt="Instagram" src="./Home_Images/sns_instargram.svg">
+                            <img class="hover" alt="Instagram hover" src="./Home_Images/sns_instargram_on.svg">
+                        </a>
+                        <a href="#" class="sns-icon">
+                            <img class="normal" alt="Facebook" src="./Home_Images/sns_facebook.svg">
+                            <img class="hover" alt="Facebook hover" src="./Home_Images/sns_facebook_on.svg">
+                        </a>
+                        <a href="#" class="sns-icon">
+                            <img class="normal" alt="YouTube" src="./Home_Images/sns_youtube.svg">
+                            <img class="hover" alt="YouTube hover" src="./Home_Images/sns_youtube_on.svg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-inner">
+                <div class="frame-div">
+                    <div class="frame-parent1">
+                        <div class="frame-parent2">
+                            <div class="frame-parent3">
+                                <div class="wrapper"><div class="e-jejecommsgmailcom">(주)제제컴즈</div></div>
+                                <div class="container"><div class="e-jejecommsgmailcom">대표자 : 김준강</div></div>
+                                <div class="frame"><div class="e-jejecommsgmailcom">사업자등록번호 : 641-88-00828</div></div>
+                            </div>
+                            <div class="frame-parent3">
+                                <div class="e-jejecommsgmailcom">통신판매업신고 : 제2021-성남수정-1335호</div>
+                            </div>
+                            <div class="e-jejecommsgmailcom">13449 경기 성남시 수정구 달래내로 46, 성남글로벌융합센터 A동 405호</div>
+                        </div>
+                        <div class="t-070-4252-5571-parent">
+                            <div class="e-jejecommsgmailcom">T. 070-4252-5571</div>
+                            <div class="e-jejecommsgmailcom">E. jejecomms@gmail.com</div>
+                            <div class="e-jejecommsgmailcom">F. 0508-910-5575</div>
+                        </div>
+                    </div>
+                    <div class="parent">
+                        <b class="e-jejecommsgmailcom">회사소개</b>
+                        <b class="e-jejecommsgmailcom">이용약관</b>
+                        <b class="e-jejecommsgmailcom">개인정보처리방침</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+      // Header scroll effect
+      const header = document.querySelector('.header');
+      const symbolIcon = document.querySelector('.symbol-icon1');
+      const logoImage = document.querySelector('.logo-bold');
+
+      const topImages = {
+        symbol: './Home_Images/symbol_top.svg',
+        logo: './Home_Images/qr_alliym_name_top.svg'
+      };
+      const scrolledImages = {
+        symbol: './Home_Images/symbol.png',
+        logo: './Home_Images/qr_alliym_name.png'
+      };
+      
+      window.addEventListener('scroll', function () {
+        const isScrolled = window.scrollY > 10;
+        
+        if (isScrolled) { 
+          header.classList.add('scrolled');
+          symbolIcon.src = scrolledImages.symbol;
+          logoImage.src = scrolledImages.logo;
+        } else {
+          header.classList.remove('scrolled');
+          symbolIcon.src = topImages.symbol;
+          logoImage.src = topImages.logo;
+        }
+      });
+      
+      // Carousel functionality
+      const heroImages = ["./Home_Images/Hero_1.png", "./Home_Images/Hero_2.png", "./Home_Images/Hero_1.png", "./Home_Images/Hero_2.png"];
+      const imageElement = document.querySelector(".image-1852-icon");
+      const dots = document.querySelectorAll(".carousel-dot > div");
+      const playPauseBtn = document.getElementById('playPauseBtn');
+
+      // Embedded SVG icons for play/pause button
+      const pauseIconSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='white'%3E%3Cpath d='M2 1H4V11H2V1Z'/%3E%3Cpath d='M8 1H10V11H8V1Z'/%3E%3C/svg%3E";
+      const playIconSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='white'%3E%3Cpath d='M2 1L10 6L2 11V1Z'/%3E%3C/svg%3E";
+
+      let currentIndex = 0;
+      let slideInterval;
+      let isPaused = false;
+
+      function updateSlide(index) {
+        imageElement.src = heroImages[index];
+        dots.forEach((dot, i) => {
+          dot.classList.remove("active", "inactive");
+          dot.classList.add(i === index ? "active" : "inactive");
+        });
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % heroImages.length;
+        updateSlide(currentIndex);
+      }
+
+      function startSlider() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 5000);
+        playPauseBtn.src = pauseIconSrc;
+        playPauseBtn.alt = "Pause";
+        isPaused = false;
+      }
+
+      function pauseSlider() {
+        clearInterval(slideInterval);
+        playPauseBtn.src = playIconSrc;
+        playPauseBtn.alt = "Play";
+        isPaused = true;
+      }
+
+      // Event listener for the play/pause button
+      playPauseBtn.addEventListener('click', () => {
+        if (isPaused) {
+          startSlider();
+        } else {
+          pauseSlider();
+        }
+      });
+
+      // Event listeners for the dots
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          currentIndex = index;
+          updateSlide(currentIndex);
+          if (!isPaused) {
+            startSlider();
+          }
+        });
+      });
+
+      // Initial setup
+      updateSlide(currentIndex);
+      startSlider();
+      
+      // Enhanced Video Player Functionality
+      function setupVideoPlayer(containerId, playerId, playBtnId) {
+        const container = document.getElementById(containerId);
+        const player = document.getElementById(playerId);
+        const playBtn = document.getElementById(playBtnId);
+        const playPauseBtn = container.querySelector('.play-pause-btn');
+        const progressBar = container.querySelector('.progress-bar');
+        const timeDisplay = container.querySelector('.time-display');
+        const volumeSlider = container.querySelector('.volume-slider');
+        const volumeBtn = container.querySelector('.volume-btn');
+        const fullscreenBtn = container.querySelector('.fullscreen-btn');
+        const progressContainer = container.querySelector('.progress-container');
+        
+        // Format time as MM:SS
+        function formatTime(seconds) {
+          const mins = Math.floor(seconds / 60);
+          const secs = Math.floor(seconds % 60);
+          return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Update progress bar
+        function updateProgress() {
+          const percent = (player.currentTime / player.duration) * 100;
+          progressBar.style.width = `${percent}%`;
+          
+          timeDisplay.textContent = `${formatTime(player.currentTime)} / ${formatTime(player.duration)}`;
+        }
+        
+        // Set video progress
+        function setProgress(e) {
+          const width = this.clientWidth;
+          const clickX = e.offsetX;
+          const duration = player.duration;
+          
+          player.currentTime = (clickX / width) * duration;
+        }
+        
+        // Toggle play/pause
+        function togglePlay() {
+          if (player.paused) {
+            player.play();
+            container.classList.add('playing');
+            playPauseBtn.querySelector('#playIcon').style.display = 'none';
+            playPauseBtn.querySelector('#pauseIcon').style.display = '';
+          } else {
+            player.pause();
+            playPauseBtn.querySelector('#playIcon').style.display = '';
+            playPauseBtn.querySelector('#pauseIcon').style.display = 'none';
+          }
+        }
+        
+        // Update volume
+        function setVolume() {
+          player.volume = volumeSlider.value;
+        }
+        
+        // Toggle mute
+        function toggleMute() {
+          player.muted = !player.muted;
+          volumeSlider.value = player.muted ? 0 : player.volume;
+        }
+        
+        // Toggle fullscreen
+        function toggleFullscreen() {
+          if (!document.fullscreenElement) {
+            container.requestFullscreen().catch(err => {
+              console.error(`Error attempting to enable fullscreen: ${err.message}`);
+            });
+          } else {
+            document.exitFullscreen();
+          }
+        }
+        
+        // Event listeners
+        player.addEventListener('click', togglePlay);
+        playBtn.addEventListener('click', togglePlay);
+        playPauseBtn.addEventListener('click', togglePlay);
+        player.addEventListener('timeupdate', updateProgress);
+        player.addEventListener('ended', () => {
+          playPauseBtn.querySelector('#playIcon').style.display = '';
+          playPauseBtn.querySelector('#pauseIcon').style.display = 'none';
+        });
+        progressContainer.addEventListener('click', setProgress);
+        volumeSlider.addEventListener('input', setVolume);
+        volumeBtn.addEventListener('click', toggleMute);
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
+        
+        // Initialize player
+        player.volume = 1;
+      }
+      
+      // Set up both video players
+      setupVideoPlayer('videoContainer1', 'videoPlayer1', 'playVideo1');
+      setupVideoPlayer('videoContainer2', 'videoPlayer2', 'playVideo2');
+    </script>
+</body>
+</html>
